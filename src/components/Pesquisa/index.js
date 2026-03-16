@@ -64,10 +64,16 @@ function Pesquisa() {
       <Subtitulo>Encontre seu livro em nossa estante.</Subtitulo>
       <Input
           placeholder="Escreva sua próxima leitura"
-          onChange={evento => {
+          onBlur={evento => {
               const textoDigitado = evento.target.value;
-              const resultadoPesquisa = (livros || []).filter(livro => livro.nome.toLowerCase().includes(textoDigitado.toLowerCase()));
-              setLivrosPesquisados(resultadoPesquisa);
+              if (textoDigitado === "") {
+                  setLivrosPesquisados([]);
+              } else {
+                  const resultadoPesquisa = (livros || []).filter(livro => 
+                      livro.nome ? livro.nome.toLowerCase().includes(textoDigitado.toLowerCase()) : false
+                  );
+                  setLivrosPesquisados(resultadoPesquisa);
+              }
           }}
       />
       { livrosPesquisados.map( livro => (
