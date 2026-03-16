@@ -1,8 +1,10 @@
 import { useState } from 'react';
-import Header from './components/Header';
-import Pesquisa from './components/Pesquisa';
-import UltimosLancamentos from './components/UltimosLancamentos';
+import Header from '../components/Header';
+import Pesquisa from '../components/Pesquisa';
+import UltimosLancamentos from '../components/UltimosLancamentos';
 import styled, { ThemeProvider } from 'styled-components';
+import { BrowserRouter, Routes, Route } from 'react-router-dom';
+import Favoritos from './Favoritos';
 
 const temaClaro = {
   bgHeader: '#ffffff',
@@ -21,6 +23,7 @@ const temaEscuro = {
   bgSecundario: '#121212',
   bgCard: '#242424'
 };
+
 const AppContainer = styled.div`
   width: 100vw;
   height: 100vh;
@@ -28,18 +31,27 @@ const AppContainer = styled.div`
   transition: background-image 0.3s ease;
 `;
 
-function App() {
+function Home() {
   const [tema, setTema] = useState('claro');
 
   return (
     <ThemeProvider theme={tema === 'claro' ? temaClaro : temaEscuro}>
       <AppContainer>
-        <Header tema={tema} setTema={setTema} />
-        <Pesquisa />
-        <UltimosLancamentos />
+        <BrowserRouter>
+          <Header tema={tema} setTema={setTema} />
+          <Routes>
+            <Route path="/favoritos" element={<Favoritos/>} />
+            <Route path="/" element={
+              <>
+                <Pesquisa />
+                <UltimosLancamentos />
+              </>
+            } />
+          </Routes>
+        </BrowserRouter>
       </AppContainer>
     </ThemeProvider>
   );
 }
 
-export default App;
+export default Home;
