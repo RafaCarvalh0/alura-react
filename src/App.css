@@ -1,3 +1,12 @@
+li {
+    list-style: none;
+}
+
+ul {
+    margin: 0;
+    padding: 0;
+}
+
 .App {
     width: 100vw;
     height: 100vh;
@@ -6,4 +15,41 @@
 
 .App-header {
     background-color: #fff;
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+    height: 85px;
+    box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+}
+
+.opcoes {
+    display: flex;
+    gap: 15px;
+}
+
+.opcao {
+    font-size: 16px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+    height: 100%;
+    padding: 0 10px;
+    cursor: pointer;
+    transition: color 0.2s ease;
+}
+
+.opcao:hover {
+    color: #eb9b00;
+}
+
+.icones {
+    display: flex;
+    align-items: center;
+    gap: 30px;
+}
+
+.icone {
+    width: 25px;
+    cursor: pointer;
 }
