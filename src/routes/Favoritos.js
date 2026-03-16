@@ -74,7 +74,9 @@ function Favoritos() {
 
   async function deletarFavorito(id) {
     await deleteFavorito(id);
-    await fetchFavoritos(); // Recarrega a lista após deletar
+    const novosFavoritos = favoritos.filter(favorito => favorito.id !== id);
+    setFavoritos(novosFavoritos); 
+    
     alert('Livro removido dos favoritos!');
   }
 
