@@ -1,6 +1,6 @@
-import { useState } from 'react';
-import Pesquisa from '../components/Pesquisa';
+import { useState, useEffect } from 'react';
 import styled, { ThemeProvider } from 'styled-components';
+import { getFavoritos } from '../services/favoritosService';
 
 const temaClaro = {
   bgHeader: '#ffffff',
@@ -27,13 +27,65 @@ const AppContainer = styled.div`
   transition: background-image 0.3s ease;
 `;
 
+const Titulo = styled.h2`
+  color: #fff;
+  font-size: 36px;
+  text-align: center;
+  width: 100%;
+  padding-top: 35px;
+`;
+
+const Resultado = styled.h2`
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin: 20px 0;
+  cursor: pointer;
+  text-align: center;
+  padding: 0 100px;
+
+  p {
+    color: #fff;
+    width: 200px;
+  }
+  img {
+    width: 100px;
+  }
+  &:hover {
+    border: 1px solid #fff;
+`;
+
+const ResultadoContainer = styled.div`
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+`
+
 function Favoritos() {
   const [tema] = useState('claro');
+  const [favoritos, setFavoritos] = useState([]);
+
+  async function fetchFavoritos() {
+    const favoritosDaAPI = await getFavoritos();
+    setFavoritos(favoritosDaAPI);
+  }
+
+  useEffect(() => {
+    fetchFavoritos();
+  }, []);
 
   return (
     <ThemeProvider theme={tema === 'claro' ? temaClaro : temaEscuro}>
       <AppContainer>
-        <Pesquisa />
+        <Titulo>Meus Favoritos</Titulo>
+          <ResultadoContainer>
+            {favoritos.map(favorito => (
+              <Resultado>
+                <img src={favorito.image} alt={favorito.nome} />
+                <p>{favorito.nome}</p>
+              </Resultado>
+            ))}
+          </ResultadoContainer>
       </AppContainer>
     </ThemeProvider>
   );
