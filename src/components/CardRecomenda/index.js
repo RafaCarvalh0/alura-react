@@ -14,7 +14,7 @@ const ImgLivro = styled.img`
 
 const Card = styled.div`
     align-items: center;
-    background-color: #fff;
+    background-color: ${props => props.theme.bgCard};
     box-shadow: 0 4px 8px rgba(0, 0, 0, 0.25);
     border-radius: 10px;
     display: flex;
@@ -23,6 +23,7 @@ const Card = styled.div`
     padding: 25px 20px;
     justify-content: space-around;
     width: 100%;
+    transition: background-color 0.3s ease;
 `;
 
 const Botao = styled.button`
@@ -42,6 +43,8 @@ const Botao = styled.button`
 
 const Descricao = styled.p`
     max-width: 300px;
+    color: ${props => props.theme.texto};
+    transition: color 0.3s ease;
 `
 
 function CardRecomenda({ titulo, subtitulo, descricao, img }) {

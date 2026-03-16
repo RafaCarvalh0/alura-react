@@ -5,10 +5,11 @@ import CardRecomenda from '../CardRecomenda';
 import imagemLivro from '../../image/livro2.png';
 
 const UltimosLancamentosContainer = styled.section`
-    background-color: #ebecee;
+    background-color: ${props => props.theme.bgSecundario};
     padding-bottom: 20px;
     display: flex;
     flex-direction: column;
+    transition: background-color 0.3s ease;
 `;
 
 const NovosLivrosContainer = styled.div`
@@ -30,7 +31,7 @@ function UltimosLancamentos() {
             <NovosLivrosContainer>
                 {livros.map((livro) => {
                     return (
-                        <img src={livro.src} alt={livro.nome} />
+                        <img src={livro.src} alt={livro.nome} key={livro.nome} />
                     )
                 })}
             </NovosLivrosContainer>
