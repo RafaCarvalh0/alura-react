@@ -1,4 +1,5 @@
 import styled from 'styled-components';
+import { Link } from 'react-router-dom';
 
 const Opcao = styled.li
 `
@@ -15,7 +16,7 @@ const Opcao = styled.li
     &:hover {
         color: #ffae00;
     }
-}`;
+`;
 
 const Opcoes = styled.ul
 `
@@ -23,13 +24,17 @@ const Opcoes = styled.ul
     gap: 15px;
 `;
 
-const textoOpcoes = ['CATEGORIAS', 'MINHA ESTANTE', 'FAVORITOS'];
+const textoOpcoes = ['CATEGORIAS', 'ESTANTE', 'FAVORITOS'];
 
 function OpcoesHeader() {
     return (
         <Opcoes>
             {textoOpcoes.map((texto) => (
-                <Opcao> <p>{texto}</p> </Opcao> 
+                <Link to={`/${texto.toLowerCase()}`} key={texto} style={{ textDecoration: 'none', color: 'inherit' }}>
+                    <Opcao>
+                        <p>{texto}</p>
+                    </Opcao>
+                </Link>
             ))}
         </Opcoes>
     );
