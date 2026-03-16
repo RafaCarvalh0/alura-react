@@ -2,6 +2,7 @@ import Input from '../Input';
 import styled from 'styled-components';
 import { useEffect, useState } from 'react';
 import { getLivros } from '../../services/livrosService';
+import { addFavorito } from '../../services/favoritosService'; // Importação corrigida e em uso
 
 const PesquisaContainer = styled.section`
   display: flex;
@@ -58,6 +59,11 @@ function Pesquisa() {
     fetchLivros();
   }, []);
 
+  async function insertFavorito(id) {
+    await addFavorito(id);
+    alert(`Livro adicionado aos favoritos!`);
+  }
+
   return (
     <PesquisaContainer>
       <Titulo>Já sabe por onde começar?</Titulo>
@@ -77,7 +83,7 @@ function Pesquisa() {
           }}
       />
       { livrosPesquisados.map( livro => (
-          <Resultado key={livro.nome}>
+          <Resultado key={livro.id || livro.nome} onClick={() => insertFavorito(livro.id)}>
               <img src={livro.src} alt={livro.nome}/>
               <p>{livro.nome}</p>
           </Resultado>
