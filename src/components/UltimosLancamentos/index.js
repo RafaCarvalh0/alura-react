@@ -1,6 +1,8 @@
 import { livros } from './dadosUltimosLancamentos';
 import { Titulo } from '../Titulo';
 import styled from 'styled-components';
+import CardRecomenda from '../CardRecomenda';
+import imagemLivro from '../../image/livro2.png';
 
 const UltimosLancamentosContainer = styled.section`
     background-color: #ebecee;
@@ -23,7 +25,8 @@ function UltimosLancamentos() {
             <Titulo 
                 cor="#ee8b09" 
                 tamanhoFonte="36px" 
-            >Últimos Lançamentos</Titulo>
+                >Últimos Lançamentos
+            </Titulo>
             <NovosLivrosContainer>
                 {livros.map((livro) => {
                     return (
@@ -31,6 +34,12 @@ function UltimosLancamentos() {
                     )
                 })}
             </NovosLivrosContainer>
+            <CardRecomenda
+                titulo="Talvez vc se interesse por..."
+                subtitulo="Angular"
+                descricao="Lorem ipsum dolor sit amet, consectetur adipiscing elit."
+                img = {imagemLivro}
+            />
         </UltimosLancamentosContainer>
     );
 }
