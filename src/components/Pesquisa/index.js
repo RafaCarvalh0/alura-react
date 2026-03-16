@@ -51,10 +51,12 @@ function Pesquisa() {
   const [livros, setLivros] = useState([]);
 
   useEffect(() => {
-    const livrosAPI = getLivros()
-    setLivros(livrosAPI);
+    async function fetchLivros() {
+      const livrosDaAPI = await getLivros();
+      setLivros(livrosDaAPI);
+    }
+    fetchLivros();
   }, []);
-
 
   return (
     <PesquisaContainer>
@@ -62,9 +64,9 @@ function Pesquisa() {
       <Subtitulo>Encontre seu livro em nossa estante.</Subtitulo>
       <Input
           placeholder="Escreva sua próxima leitura"
-          onBlur={evento => {
+          onChange={evento => {
               const textoDigitado = evento.target.value;
-              const resultadoPesquisa = livros.filter(livro => livro.nome.toLowerCase().includes(textoDigitado.toLowerCase()));
+              const resultadoPesquisa = (livros || []).filter(livro => livro.nome.toLowerCase().includes(textoDigitado.toLowerCase()));
               setLivrosPesquisados(resultadoPesquisa);
           }}
       />
