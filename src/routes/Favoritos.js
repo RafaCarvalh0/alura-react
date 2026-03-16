@@ -1,6 +1,7 @@
 import { useState, useEffect } from 'react';
 import styled, { ThemeProvider } from 'styled-components';
 import { getFavoritos } from '../services/favoritosService';
+import livroImg from '../image/livro.png';
 
 const temaClaro = {
   bgHeader: '#ffffff',
@@ -80,8 +81,8 @@ function Favoritos() {
         <Titulo>Meus Favoritos</Titulo>
           <ResultadoContainer>
             {favoritos.map(favorito => (
-              <Resultado>
-                <img src={favorito.image} alt={favorito.nome} />
+              <Resultado key={favorito.id}>
+                <img src={livroImg} alt={favorito.nome} /> 
                 <p>{favorito.nome}</p>
               </Resultado>
             ))}
