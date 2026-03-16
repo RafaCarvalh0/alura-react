@@ -1,6 +1,6 @@
 import { useState, useEffect } from 'react';
 import styled, { ThemeProvider } from 'styled-components';
-import { getFavoritos } from '../services/favoritosService';
+import { getFavoritos, deleteFavorito } from '../services/favoritosService';
 import livroImg from '../image/livro.png';
 
 const temaClaro = {
@@ -54,6 +54,7 @@ const Resultado = styled.h2`
   }
   &:hover {
     border: 1px solid #fff;
+  } 
 `;
 
 const ResultadoContainer = styled.div`
@@ -71,6 +72,12 @@ function Favoritos() {
     setFavoritos(favoritosDaAPI);
   }
 
+  async function deletarFavorito(id) {
+    await deleteFavorito(id);
+    await fetchFavoritos(); // Recarrega a lista após deletar
+    alert('Livro removido dos favoritos!');
+  }
+
   useEffect(() => {
     fetchFavoritos();
   }, []);
@@ -81,8 +88,8 @@ function Favoritos() {
         <Titulo>Meus Favoritos</Titulo>
           <ResultadoContainer>
             {favoritos.map(favorito => (
-              <Resultado key={favorito.id}>
-                <img src={livroImg} alt={favorito.nome} /> 
+              <Resultado key={favorito.id} onClick={() => deletarFavorito(favorito.id)}>
+                <img src={livroImg} alt={favorito.nome} />
                 <p>{favorito.nome}</p>
               </Resultado>
             ))}
