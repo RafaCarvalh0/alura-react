@@ -1,0 +1,10 @@
+.icones {
+    display: flex;
+    align-items: center;
+    gap: 30px;
+}
+
+.icone {
+    width: 25px;
+    cursor: pointer;
+}
